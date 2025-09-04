@@ -12,7 +12,7 @@ import string
 
 class RAGmaker:
     def __init__(self, **kwargs):
-        self.model_name = kwargs.get('model_name','all-mpnet-base-v2')
+        self.embedding_model_name = kwargs.get('embedding_model_name','all-mpnet-base-v2')
         self.generative_library = kwargs.get('generative_library','ollama')
         self.generative_transformer_model = kwargs.get('generative_transformer_model','allenai/OLMo-2-0425-1B-Instruct')
         self.generative_ollama_model = kwargs.get('generative_ollama_model','llama3.2')
@@ -34,7 +34,7 @@ class RAGmaker:
     def encode_text_database(self, text_data_list, metadata=None):
         self.text_data_list = text_data_list
         self.metadata = metadata
-        self.embedding_model = SentenceTransformer(self.model_name)
+        self.embedding_model = SentenceTransformer(self.embedding_model_name)
         self.embeddings = self.embedding_model.encode(text_data_list, normalize_embeddings=True)
 
     def index_database(self):
@@ -126,7 +126,7 @@ class RAGmaker:
     def query_text_rag_model(self, query_text, system_prompt, k=1, text_character_limit=None, max_new_tokens=200):
         format_keys = [tup[1] for tup in string.Formatter().parse(system_prompt) if tup[1] is not None]
         if ("user_input" not in format_keys or "search_output" not in format_keys):
-            print("ERROR: please inclue 'user_input' and 'search_output' format keys in your system prompt.")
+            print("ERROR: please include 'user_input' and 'search_output' format keys in your system prompt.")
             return
         self.search_database(query_text, k=k)
         self.format_text_matches(text_character_limit=text_character_limit)
