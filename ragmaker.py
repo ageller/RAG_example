@@ -5,7 +5,7 @@ try:
     import ollama
     print('ollama Python library imported successfully.')
 except ImportError:
-    print('ollama not available in Python. Either install ollama or select transformers in RAGmaker')
+    print('ollama not available in Python. Either install ollama or select transformers in RAGmaker.')
 import string
 
 
