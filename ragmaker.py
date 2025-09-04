@@ -89,7 +89,7 @@ class RAGmaker:
         
         self.search_result_text = ""
         for n,i in enumerate(self.idxs_q_matched[0]):
-            self.search_result_text += f'Match {n+1}:\n'
+            # self.search_result_text += f'Match {n+1}:\n'
             if (self.metadata is not None):
                 self.search_result_text += 'Metadata:\n'
                 self.search_result_text += self.metadata[i] + '\n'
